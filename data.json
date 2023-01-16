@@ -1,0 +1,97 @@
+{
+    "Client": {
+        "1": {
+            "nom": "kane",
+            "prenom": "lamine",
+            "numero": "770977510",
+            "date-naissance": "12/10/2005",
+            "groupe-sanguin": "O-",
+            "poids": "129",
+            "taille": "89",
+            "email": "mlaminekane@gmail.com",
+            "password": "4ks",
+            "date-rendez-vous": "28/12/2022",
+            "heure-rendez-vous": "21:46:00",
+            "service": "Consulting",
+            "Medecin-affecter": {
+                "nom": "kane",
+                "prenom": "doc",
+                "mail": "docteurkane@gmail.com",
+                "numero": "779999999"
+            },
+            "ordonnance": [
+                "alcool",
+                "lunette ",
+                "5"
+            ]
+        },
+        "2": {
+            "nom": "Pnl",
+            "prenom": "Bene",
+            "numero": "770922233",
+            "date-naissance": "12/02/2004",
+            "groupe-sanguin": "AB-",
+            "poids": "102",
+            "taille": "34",
+            "email": "benebene@gmail.com",
+            "password": "ujz7t0]f",
+            "Medecin-affecter": {
+                "nom": "kempachi",
+                "prenom": "Unohana",
+                "mail": "yashiru@gmail.com",
+                "numero": "771234567"
+            },
+            "service": "Radiographie"
+        },
+        "3": {
+            "nom": "Uzumaki",
+            "prenom": "Naruto",
+            "numero": "776665544",
+            "date-naissance": "10/10/2010",
+            "groupe-sanguin": "A",
+            "poids": "192",
+            "taille": "88",
+            "email": "naruto@gmail.com",
+            "password": "p072ei-n",
+            "date-rendez-vous": "21/12/2022",
+            "heure-rendez-vous": "20:56:42",
+            "Medecin-affecter": {
+                "nom": "kane",
+                "prenom": "doc",
+                "mail": "docteurkane@gmail.com",
+                "numero": "779999999"
+            }
+        }
+    },
+    "Secretaire": {
+        "1": {
+            "nom": "deidara",
+            "prenom": "goat",
+            "numero": "770101010",
+            "email": "deidara@gmail.com",
+            "password": "4ks"
+        }
+    },
+    "Medecin": {
+        "1": {
+            "nom": "kane",
+            "prenom": "doc",
+            "numero": "779999999",
+            "email": "docteurkane@gmail.com",
+            "password": "4ks"
+        },
+        "2": {
+            "nom": "kempachi",
+            "prenom": "Unohana",
+            "numero": "771234567",
+            "email": "yashiru@gmail.com",
+            "password": "yashiru12"
+        }
+    },
+    "admin": {
+        "1": {
+            "login": "nouha",
+            "password": "4keusgang"
+        }
+    }
+}
