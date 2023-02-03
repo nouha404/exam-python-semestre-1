@@ -1,7 +1,7 @@
 import json
 import os
 import time
-from datetime import datetime
+from datetime import datetime, timedelta
 from random import sample
 
 import typer
@@ -181,7 +181,7 @@ def client_login():
                         print("Vous n'avez pas encore de rendez-vous")
 
                 typer.secho(
-                    f"a- Prendre Rendez-vous\nb- Afficher rendez prochain\nc- Telecharger l'ordonnace\nd- Disconnect",
+                    f"a- Prendre Rendez-vous\nb- Afficher rendez prochain\nc- Telecharger l'ordonnace\nd- Disconnect\ne-Prendre rendez-vous demain 10h",
                     fg=typer.colors.BRIGHT_MAGENTA)
                 CHOIX_CLIENT = input("Service client : ")
                 match CHOIX_CLIENT:
@@ -198,6 +198,10 @@ def client_login():
                         telecharger_ordonnance()
                     case 'd':
                         break
+                    case 'e':
+                        Client.upsert({"date-rendez-vous": date_demain(), 'heure-rendez-vous': '10h:45'},
+                                      where('email') == item['email'])
+                        typer.secho('Le rendez-vous a été prise...', fg=typer.colors.BRIGHT_RED)
 
 
 def telecharger_ordonnance():
@@ -212,7 +216,7 @@ def telecharger_ordonnance():
                     data = item['ordonnance']
                     json.dump(data, f, indent=4)
             else:
-                return typer.secho("\nVeillez prendre un rendez-vous\n", fg=typer.colors.BRIGHT_RED,
+                typer.secho("\nVeillez prendre un rendez-vous\n", fg=typer.colors.BRIGHT_RED,
                                    bg=typer.colors.BRIGHT_BLACK)
 
     typer.secho('\nOrdonnance telecharger avec succes\n', fg=typer.colors.BRIGHT_GREEN)
@@ -311,13 +315,15 @@ def creer_rendez_vous():
     now = datetime.now()
     dt_string = now.strftime("%d/%m/%Y")
     hour_string = now.strftime("%H:%M:%S")
-    for item in track(range(100), description="Creation du rendez vous"):
+
+    for _ in track(range(100), description="Creation du rendez vous"):
         time.sleep(0.02)
-        if email == item['email'] and numero == item['numero']:
+    for item in Client:
+        if item['email'] == email and item['numero'] == numero:
             Client.upsert({"date-rendez-vous": dt_string, 'heure-rendez-vous': hour_string, 'service': service},
                           where('numero') == item['numero'])
-        else:
-            return print(f"Cet individu n'existe pas...")
+        # else:
+        #     print(f"Cet individu n'existe pas...")
 
 
 MEDECIN_INF0 = []
@@ -356,11 +362,12 @@ def creer_service():
     email = input('email du Client : ')
     numero = input('Numero du Client : ')
     new_service = input('Service : ')
-    for item in track(range(100), description="Creation du service"):
+    for _ in track(range(100), description="Creation du service"):
         time.sleep(0.03)
+    for item in Client:
         if email == item['email'] and numero == item['numero']:
             Client.upsert({'service': new_service}, where('email') == item['email'])
-            typer.secho(f"Le service de {item['prenom']} a été creer en {new_service}", fg=typer.colors.BRIGHT_GREEN)
+        typer.secho(f"Le service de {item['prenom']} a été creer en {new_service}", fg=typer.colors.BRIGHT_GREEN)
 
 
 def affection_medecin():
@@ -381,17 +388,18 @@ def lister_mes_affection():
     medecin_mail = typer.prompt('Validez votre mail')
     table = Table('NOM', 'PRENOM', 'EMAIL', 'DATE-NAISSANCE', 'GROUPE-SANGUIN', 'POIDS', 'TAILLE', 'SERVICE')
     for item in Client:
-        medecin_mail_in_client = item.get('Medecin-affecter').get('mail')
-        if medecin_mail in medecin_mail_in_client:
-            # item.get(clé, "valeur")  si la clé n'est pas présente dans le dictionnaire ca renvoie l'autre valeur.
-            table.add_row(item.get('nom', 'pas assigné'),
-                          item.get('prenom', 'pas assigné'),
-                          item.get('email', 'pas assigné'),
-                          item.get('date-naissance', 'pas assigné'),
-                          item.get('groupe-sanguin', 'pas assigné'),
-                          item.get('poids', 'pas assigné'),
-                          item.get('taille', 'pas assigné'),
-                          item.get('service', 'pas assigné'))
+        if 'Medecin-affecter' in item:
+            medecin_mail_in_client = item.get('Medecin-affecter').get('mail')
+            if medecin_mail in medecin_mail_in_client:
+                # item.get(clé, "valeur")  si la clé n'est pas présente dans le dictionnaire ca renvoie l'autre valeur.
+                table.add_row(item.get('nom', 'pas assigné'),
+                              item.get('prenom', 'pas assigné'),
+                              item.get('email', 'pas assigné'),
+                              item.get('date-naissance', 'pas assigné'),
+                              item.get('groupe-sanguin', 'pas assigné'),
+                              item.get('poids', 'pas assigné'),
+                              item.get('taille', 'pas assigné'),
+                              item.get('service', 'pas assigné'))
     console.print(table)
 
 
@@ -411,3 +419,13 @@ def prescrire_ordonnnace():
             Client.upsert({'ordonnance': ARRAY_MEDOC}, where('email') == item['email'])
             return typer.secho(f"{len(ARRAY_MEDOC)} medicament ont été bien prescrit a {item['nom']} {item['prenom']}",
                                fg=typer.colors.BRIGHT_GREEN)
+
+
+# Rajoue demander par le prof
+def date_demain():
+    now = datetime.now()
+    tomorrow = now + timedelta(days=1)
+    # retourn la date de demain
+    return tomorrow.date().strftime("%Y-%m-%d")
+
+# print(date_demain())

@@ -101,7 +101,7 @@ while True:
                     case 'b':
                         os.system('cls')
                         typer.secho('u - Ajouter Utilisateurs\ns - Ajouter Secretaire\nm - Ajouter Medecin',
-                                    fg=typer.colors.BRIGHT_BLACK, bg=typer.colors.BRIGHT_WHITE, blank=True)
+                                    fg=typer.colors.BRIGHT_BLACK, bg=typer.colors.BRIGHT_WHITE)
                         CHOIX_USER_ADD = typer.prompt("Votre choix ")
                         if CHOIX_USER_ADD.lower() == 'u':
                             inscription()
@@ -121,5 +121,5 @@ while True:
                     case 'd':
                         break
         case '5':
-            typer.secho('Aurevoir ! ', fg=typer.colors.RED)
+            typer.secho('Aurevoir ! \nMerci', fg=typer.colors.RED)
             break

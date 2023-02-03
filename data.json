@@ -10,9 +10,6 @@
             "taille": "89",
             "email": "mlaminekane@gmail.com",
             "password": "4ks",
-            "date-rendez-vous": "28/12/2022",
-            "heure-rendez-vous": "21:46:00",
-            "service": "Consulting",
             "Medecin-affecter": {
                 "nom": "kane",
                 "prenom": "doc",
@@ -20,8 +17,8 @@
                 "numero": "779999999"
             },
             "ordonnance": [
-                "alcool",
-                "lunette ",
+                "Bandage",
+                "Paracetamol",
                 "5"
             ]
         },
@@ -41,6 +38,8 @@
                 "mail": "yashiru@gmail.com",
                 "numero": "771234567"
             },
+            "date-rendez-vous": "02/02/2023",
+            "heure-rendez-vous": "18:13:24",
             "service": "Radiographie"
         },
         "3": {
@@ -61,6 +60,41 @@
                 "mail": "docteurkane@gmail.com",
                 "numero": "779999999"
             }
+        },
+        "4": {
+            "nom": "Niang",
+            "prenom": "Aly Tall",
+            "numero": "775556677",
+            "date-naissance": "16/04/1990",
+            "groupe-sanguin": "ab",
+            "poids": "146",
+            "taille": "90",
+            "email": "alytall@gmail.com",
+            "password": "4ks",
+            "date-rendez-vous": "2023-02-04",
+            "heure-rendez-vous": "10h:45",
+            "Medecin-affecter": {
+                "nom": "kane",
+                "prenom": "doc",
+                "mail": "docteurkane@gmail.com",
+                "numero": "779999999"
+            },
+            "ordonnance": [
+                "Pensement",
+                "calin",
+                "5"
+            ]
+        },
+        "5": {
+            "nom": "Modu",
+            "prenom": "Diangne",
+            "numero": "770987733",
+            "date-naissance": "12/05/2008",
+            "groupe-sanguin": "b",
+            "poids": "192",
+            "taille": "85",
+            "email": "diangne@gmail.com",
+            "password": "k7a2t6l@"
         }
     },
     "Secretaire": {
